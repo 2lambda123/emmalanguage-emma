@@ -16,6 +16,7 @@
 
 package org.emmalanguage.mitos.util;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.core.memory.DataInputViewStreamWrapper;
 
@@ -60,6 +61,7 @@ public class SocketCollector<T> {
                     //System.out.println("SocketCollector accepted");
 
                     ObjectInputStream ois = new ObjectInputStream(inStream);
+                    ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
                     TypeSerializer<T> serializer = (TypeSerializer<T>) ois.readObject();
 
                     while (true) {

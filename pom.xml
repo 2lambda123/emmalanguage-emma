@@ -164,7 +164,8 @@
         <spark.scope>provided</spark.scope>
         <flink.scope>provided</flink.scope>
         <hadoop.scope>provided</hadoop.scope>
-    </properties>
+  <versions.java-security-toolkit>1.1.2</versions.java-security-toolkit>
+ </properties>
 
     <!-- Sonatype distribution management -->
     <distributionManagement>
@@ -471,7 +472,12 @@
                 <artifactId>config</artifactId>
                 <version>${typesafe-config.version}</version>
             </dependency>
-        </dependencies>
+   <dependency>
+    <groupId>io.github.pixee</groupId>
+    <artifactId>java-security-toolkit</artifactId>
+    <version>${versions.java-security-toolkit}</version>
+   </dependency>
+  </dependencies>
     </dependencyManagement>
 
     <dependencies>
