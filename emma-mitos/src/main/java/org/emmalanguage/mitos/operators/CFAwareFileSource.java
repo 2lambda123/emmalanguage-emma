@@ -16,6 +16,7 @@
 
 package org.emmalanguage.mitos.operators;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -55,10 +56,10 @@ public abstract class CFAwareFileSource<T> extends BagOperator<Integer, T> {
             BufferedReader br = new BufferedReader(isr, 1024*1024);
 
             String line;
-            line = br.readLine();
+            line = BoundedLineReader.readLine(br, 5_000_000);
             while (line != null) {
                 out.collectElement(parseLine(line));
-                line = br.readLine();
+                line = BoundedLineReader.readLine(br, 5_000_000);
             }
 
             br.close();
